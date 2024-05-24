@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de formulario</title>
+    <script src="./js/validacion.js" ></script>
+</head>
+<body> 
+    <div class="container" >
+        <div class="formulario" >
+            <p>
+                Todos los formularios que se manejan dentro de la web, utilizan metodos 
+                para el envio de los datos que recopilan, esto sirve para poder atender
+                las solicitudes por parte de los clientes. Las solicitudes son objetos
+                conocidos como request, todo cliente (cliente es cualquier aplicacion
+                que se conecta por un medio web/movil que utiliza protocolos https, tcp,
+                udp, etc) que realiza peticiones y estas son atendidas por medio de un
+                servidor. El servidor es una computadora la cual debe de generar 
+                respuestas con el objeto response, por medio del mismo protocolo.
+
+                Dentro de los formularios se utilizan metodos de acceso a las peticiones
+                los cuales son:
+                <br>
+                GET: es el metodo por defecto, que se utiliza en la mayoria de las solicitudes
+                web, mediante el cual se envia la peticion a traves de la salida estandar 
+                del navegador osea por la url, esto propicia que se pueda visualizar los
+                elementos de la peticion.
+                <br>
+                POST: es el metodo que se encarga de realizar una inserción o solicitud de
+                un nuevo registro, de igual forma se envia la peticion por medio de la url, pero 
+                de forma oculta, esto le da cierto nivel de seguridad al usuario de que no se comparte
+                la información por la salida estandar.
+                
+            </p>
+            <br>
+            <form method="post" name="formulario" onsubmit="return validar(this)" >
+                <br>
+                <div class="datos" >
+                    <label for="">Nombre: </label>
+                    <br>
+                    <input type="text" name="nombre" id="nombre" class="input-nombre">
+                    <br>
+                    <label for="">Edad: </label>
+                    <br>
+                    <input type="number" name="edad" id="edad" class="input-edad">
+                    <br>
+                    <label for="">Email: </label>
+                    <br>
+                    <input type="email" name="email" id="email" class="input-email">
+                    <br>
+                    <label for="">Password: </label>
+                    <br>
+                    <input type="password" name="password" id="password" class="input-password">
+                    <br>
+                    <input type="submit" name="enviar" value="Enviar Datos">
+                    <br>
+                    <input type="reset" name="borrar" value="Borrar Datos">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
