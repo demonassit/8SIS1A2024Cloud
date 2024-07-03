@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script
+        src="https://kit.fontawesome.com/101326ea39.js" crossorigin="anonymous"
+    >
+        
+    </script>
+</head>
+<body>
+    <section>
+        <header>
+            <h1>Pokedex</h1>
+        </header>
+    </section>
+    <main class="body-container" >
+        <section class="half" >
+            <div class="d-flex center-flex" >
+                <input type="text" id="pokemonName" class="lcd-input" placeholder="Ingresa el nombre del pokemon">
+                <input type="hidden" id="pokemonId" value="0">
+                <button id="btnSearch" class="btn" >
+                    <i class="fa-solid fa-magnifying-glass" ></i>
+                </button>
+                <div class="columns-elements" >
+                    <button class="btnUp" class="btn" >
+                        <i class="fa-solid fa-caret-up" ></i>
+                    </button>
+                    <button class="btnDown" class="btn" disabled >
+                        <i class="fa-solid fa-caret-down" ></i>
+                    </button>
+                </div>
+            </div>
+            <div id="pokedisplay-container" class="d-flex center-flex pokedisplay-container">
+                <img src="./img/pokeball.png" alt="Pokedisplay" class="Pokedisplay" >
+
+            </div>
+            
+        </section>
+    </main>
+    
+</body>
+</html>
