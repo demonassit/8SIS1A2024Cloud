@@ -40,6 +40,49 @@
             </div>
             
         </section>
+        <section id="pokemonData" class="half" >
+            <h3 id="pokemonNameResult" class="center-flex" ></h3>
+            <div class="center-flex" >
+                <div> Tipo de Pokemon: </div> 
+            
+                <div id="pokemonTypes" class="pokemon-types-container" > </div>
+            </div>
+            <table class="pokemon-stat-table" >
+                <thead>
+                    <tr>
+                        <td colspan="6" >Estadisticas Base</td>
+                    </tr>
+                    <tr>
+                        <td>hp</td>
+                        <td>attack</td>
+                        <td>defense</td>
+                        <td>special attack</td>
+                        <td>special defense</td>
+                        <td>speed</td>
+                    </tr>
+                </thead>
+                <tbody id="pokemonStats" >
+                    <tr>
+                        <td class="pokemon-stat" id="pokemonStatHp" >0</td>
+                        <td class="pokemon-stat" id="pokemonStatAttack" >0</td>
+                        <td class="pokemon-stat" id="pokemonStatDefense" >0</td>
+                        <td class="pokemon-stat" id="pokemonStatSpecialAttack" >0</td>
+                        <td class="pokemon-stat" id="pokemonStatSpecialDefense" >0</td>
+                        <td class="pokemon-stat" id="pokemonStatSpeed" >0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row center-flex" >
+                <div class="row-element" >
+                    Movimientos:
+                    <ul id="pokemonMoves" ></ul>
+                </div>
+                <div class="row-element" >
+                    Habilidades:
+                    <ul id="pokemonAbilities" ></ul>
+                </div>
+            </div>
+        </section>
     </main>
     
 </body>
