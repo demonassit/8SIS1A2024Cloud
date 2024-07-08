@@ -76,3 +76,76 @@ const processPokemonTypes = (pokemonData) => {
     //agrego las etiquetas que cree
     containers.pokemonTypesContainer.innerHTML = pokemonType;
 };
+
+//vamos hacer una funcion para poder obtener las estadisticas
+const processPokemonStats = (pokemonData) => {
+    //lo que vamos hacer es una funcion que se encargue de ir iterando sobre cada uno de los datos que existen dentro de la api, eso atraves del uso de un forEach. Primero vamos a buscar por el nombre del pokemon y que empiece a iterar para ir obteniendo estadistica por estadistica
+    pokemonData?.forEach((pokemonData)=>{
+        //hay que evaluar si es el nombre correcto, y a partir de ahi es obtener cada uno de los valores
+        switch(pokemonStatData.stat.name){
+            case "hp":
+                //mandar obtener el front
+                pokemonStatsElements.hp.innerHTML = pokemonStatData.base_stat;
+                pokemonStatsElements.hp.style = `background: linear-gradient(0deg, rgba(0, 118, 255,1) ${pokemonStatData.base_stat}%, rgba(0,0,0,1) ${pokemonStatData.base_stat}%);`;
+                break;
+            case "attack":
+                //mandar obtener el front
+                pokemonStatsElements.attack.innerHTML = pokemonStatData.base_stat;
+                pokemonStatsElements.attack.style = `background: linear-gradient(0deg, rgba(0, 118, 255,1) ${pokemonStatData.base_stat}%, rgba(0,0,0,1) ${pokemonStatData.base_stat}%);`;
+                break;
+            case "defense":
+                //mandar obtener el front
+                pokemonStatsElements.defense.innerHTML = pokemonStatData.base_stat;
+                pokemonStatsElements.defense.style = `background: linear-gradient(0deg, rgba(0, 118, 255,1) ${pokemonStatData.base_stat}%, rgba(0,0,0,1) ${pokemonStatData.base_stat}%);`;
+                break;
+            case "special-attack":
+                //mandar obtener el front
+                pokemonStatsElements.specialAttack.innerHTML = pokemonStatData.base_stat;
+                pokemonStatsElements.specialAttack.style = `background: linear-gradient(0deg, rgba(0, 118, 255,1) ${pokemonStatData.base_stat}%, rgba(0,0,0,1) ${pokemonStatData.base_stat}%);`;
+                break;
+            case "special-defense":
+                //mandar obtener el front
+                pokemonStatsElements.specialDefense.innerHTML = pokemonStatData.base_stat;
+                pokemonStatsElements.specialDefense.style = `background: linear-gradient(0deg, rgba(0, 118, 255,1) ${pokemonStatData.base_stat}%, rgba(0,0,0,1) ${pokemonStatData.base_stat}%);`;
+                break;
+            case "speed":
+                //mandar obtener el front
+                pokemonStatsElements.speed.innerHTML = pokemonStatData.base_stat;
+                pokemonStatsElements.speed.style = `background: linear-gradient(0deg, rgba(0, 118, 255,1) ${pokemonStatData.base_stat}%, rgba(0,0,0,1) ${pokemonStatData.base_stat}%);`;
+                break;
+        }
+    });
+};
+
+//necesitamos otra funcion para obtener los movimientos 
+const processPokemonMoves = (pokemonData) => {
+    let pokemonMovesContent = "";
+    //debo hacer lo mismo que con las estadisticas
+    pokemonData.moves?.forEach((pokemonMove) => {
+        pokemonMovesContent += `<li>${pokemonMove.move.name}</li>`;
+    });
+    
+    containers.pokemonMovesElement.innerHTML = pokemonMovesContent;
+};
+
+//necesitamos otra funcion para obtener los habilidades 
+const processPokemonAbilities = (pokemonData) => {
+    let pokemonAbilitiesContent = "";
+    //debo hacer lo mismo que con las estadisticas
+    pokemonData.abilities?.forEach((pokemonAbility) => {
+        pokemonAbilitiesContent += `<li>${pokemonAbility.ability.name}</li>`;
+    });
+    
+    containers.pokemonAbilitiesElement.innerHTML = pokemonAbilitiesContent;
+};
+
+//tengo que crear una funcion para la carga de la imagen y deshabilitar los botones para que el usuario no le pique
+const setLoading = () =>{
+    containers.imageContainer.innerHTML = imageTemplete.replace("{imgSrc}", images.imgLoading);
+    buttons.all.forEach(button => button.disabled = true);
+};
+
+//necesito otra funcion para habilitarlos
+const setLoadingComplete = () => {
+    buttons.all.forEach(button => checkDisabled(button));
+}
