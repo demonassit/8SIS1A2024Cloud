@@ -149,3 +149,61 @@ const setLoading = () =>{
 const setLoadingComplete = () => {
     buttons.all.forEach(button => checkDisabled(button));
 }
+
+// Necesitamos una funcion que obtenga la informacion de la API, a travez de una solicitud a partir de la URl, y derivado de ello cargar la informacion de forma local, para ello necesitamos una funcion de tipo FETCH la cual nos devuelve una promesa (es uan funcion de tipo asincrona, porque no devuelve la informacion en el mismo tiempo), necesitamos establecer los parametros para saber que nos debe devolver
+
+const getPokemonData = async (pokemonName) => fetch(`${pokeApiUrl}pokemon/${pokemonName}`, {
+    //los metodos apartir de http son los que nos van a devolver las cosas de la peticion a aprtir de crear los encabezados de la promesa
+    method : 'GET', 
+    //debo establecer las cabeceras de la peticion, cual es formato, como los vamos a obtener, el tipo de contenido, etc
+    headers: {
+        'Content-Type' : 'application/json'
+    },
+    //si es necesario al ocupar otros metodos como POST, PUT, PATCH, se debe de establecer la conversion de las cadenas 
+    //body : JSON.stringify(miObjetoJson)  todo el formato de la peticion
+}).then((res)=>res.json()).catch((error) => ({resquestFailed : true}));
+
+//vamos a deshabilitar los botones o no, en este caso unicamente para los botones inferior
+const checkDisabled = (button) => {
+    button.disabled = button.id === "btnDown" && containers.pokemonIdElement.value <= 1;
+}
+
+//necesitamos una funcion para validar que se reciba el nombre y id del poemon 
+
+const setPokemonData = async (pokemonName) => {
+    if(pokemonName){
+        //carg ala imagen de busqueda del pokemon y deshabilita los botoenes
+        setLoading();
+        //realizo la consulta con un await
+        const pokemonData = await getPokemonData(typeof pokemonName === typeof ""? pokemonName.toLowerCase() : pokemonName);
+        if(pokemonName.resquestFailed){
+            //envio la imagen de pokemon no encontrado
+            containers.imageContainer.innerHTML = imageTemplete.replace("{imgSRC}", images.imgPokemonNoFound);
+        }else{
+            //si lo ecuentra
+            containers.imageContainer.innerHTML = `
+            ${imageTemplete.replace("{imgSRC}", pokemonData.sprites.front_defautl)}  
+            ${imageTemplete.replace("{imgSRC}", pokemonData.sprites.front_shiny)} ` ;
+            containers.pokemonNameElement.innerHTML = pokemonData.name;
+
+            containers.pokemonIdElement.value = pokemonData.id;
+
+            //empiezo con las funciones de cada tipo
+            processPokemonTypes(pokemonData);
+            processPokemonStats(pokemonData);
+            processPokemonAbilities(pokemonData);
+            processPokemonMoves(pokemonData);
+        }
+        //vuelvo habilitar los botones
+        setLoadingComplete();
+    }else{
+        //aqui es cuanod mando un error
+        FileSystemWritableFileStream.fire({
+            title : "Error",
+            text : "Ingresa el nombre del pokemon primero",
+            icon : "error",
+            confirmButtonText : "Aceptar"
+        });
+    }
+};
+
